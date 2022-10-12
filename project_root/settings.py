@@ -49,9 +49,8 @@ INSTALLED_APPS = [
 
     # 3rd party apps
 
-
-    # local apps
-    # 'courses.apps.CoursesConfig',
+    # custom apps
+    'courses_app',
 ]
 
 MIDDLEWARE = [
