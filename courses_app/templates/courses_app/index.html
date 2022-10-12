@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- font-awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static 'courses_app/img/favicon.ico' %}" type="image/x-icon">
+    <!-- logo -->
+    <link rel="icon" href="{% static 'courses_app/img/logo.ico' %}" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Silkscreen"/>
+    <!-- static css -->
+    <link rel="stylesheet" href="{% static 'courses_app/css/style.css' %}">
+    
+    
+    <title>Get Free Course</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a href="" class="navbar-brand flex-grow-1" style="color: #fff; margin-left: 25px; font-family: Silkscreen;">
+                    <i class="fas fa-book-reader"></i>&nbsp; &nbsp; <span style="color: green;">Tech</span><span style="color: orange;">Juice</span> Academy
+                </a>
+            </div>
+        </header>
+
+        <div class="container mt-5" style="width: 80%;">
+            <button class="btn btn-outline-primary" style="width: 100%; fontsize:20px; cursor: default;">Choose just one course below</button>
+            <br><br>
+
+            <form action="{% url 'courses_app:send_mail' %}" method="POST">
+                {% csrf_token %}
+                <div class="d-flex justify-content-between" role="group">
+                    <input type="radio" class="btn-check" name="courses" id="btnradio1" autocomplete="off" value="React">
+                    <label for="btnradio1" class="btn btn-outline-primary btn-lg mb-3 p-4" id="courses"><i class="fab fa-react fa-3x"></i></label>
+
+                    <input type="radio" class="btn-check" name="courses" id="btnradio2" autocomplete="off" value="Angular">
+                    <label for="btnradio2" class="btn btn-outline-primary ns-2 btn-lg mb-3 p-4" id="courses"><i class="fab fa-angular fa-3x"></i></label>
+
+                    <input type="radio" class="btn-check" name="courses" id="btnradio3" autocomplete="off" value="Python">
+                    <label for="btnradio3" class="btn btn-outline-primary ns-2 btn-lg mb-3 p-4" id="courses"><i class="fab fa-python fa-3x"></i></label>
+
+                    <input type="radio" class="btn-check" name="courses" id="btnradio4" autocomplete="off" value="Vue">
+                    <label for="btnradio4" class="btn btn-outline-primary ns-2 btn-lg mb-3 p-4" id="courses"><i class="fab fa-vuejs fa-3x"></i></label>
+
+                    <input type="radio" class="btn-check" name="courses" id="btnradio5" autocomplete="off" value="HTML">
+                    <label for="btnradio5" class="btn btn-outline-primary ns-2 btn-lg mb-3 p-4" id="courses"><i class="fab fa-html5 fa-3x"></i></label>
+
+                    <input type="radio" class="btn-check" name="courses" id="btnradio6" autocomplete="off" value="CSS">
+                    <label for="btnradio6" class="btn btn-outline-primary ns-2 btn-lg mb-3 p-4" id="courses"><i class="fab fa-css3-alt fa-3x"></i></label>
+
+                    <input type="radio" class="btn-check" name="courses" id="btnradio7" autocomplete="off" value="Node">
+                    <label for="btnradio7" class="btn btn-outline-primary ns-2 btn-lg mb-3 p-4" id="courses"><i class="fab fa-node fa-3x"></i></label>
+
+                    <input type="radio" class="btn-check" name="courses" id="btnradio8" autocomplete="off" value="Docker">
+                    <label for="btnradio8" class="btn btn-outline-primary ns-2 btn-lg mb-3 p-4" id="courses"><i class="fab fa-docker fa-3x"></i></label>
+                </div>                
+
+                <div class="card p-3 border-primary mt-3">
+                    <h5 class="text-center text-primary mb-3">Fill out this form</h5>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
+                        <input type="text" class="form-control" placeholder="Full Name" name="name" required>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input type="email" class="form-control" placeholder="Email" name="email" required>
+                    </div>
+
+                    <div class="btn-group mt-3">
+                        <button class="btn btn-outline-primary mb-4" style="border-radius: 4px;" type="submit">
+                            <i class="fas fa-cloud-download-alt">&nbsp; &nbsp; Get Course !</i>
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>   
+        
+        <h5 class="text-center text-primary mt-2 blink_me"> 100% Free Courses </h5>
+
+    </div> 
+
+    <!-- sweet alert -->
+
+    {% for msg in messages %}
+    {% if msg.tags == 'success' %}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var msg = '{{ msg }}';
+            swal("Successful!", msg, "success");
+        </script>
+    {% endif %}
+    {% endfor %}
+
+    <!-- Bootstrap 5 js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script>
+        [function blink() {
+            $('.blink_me').fadeOut(500).fadeIn(500, blink);
+        }]();
+    </script>
+
+</body>
+</html>
